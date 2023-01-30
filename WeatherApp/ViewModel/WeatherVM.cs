@@ -10,7 +10,7 @@ namespace WeatherApp.ViewModel
 {
     public class WeatherVM : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
+        
 
         private string query;
 
@@ -46,6 +46,27 @@ namespace WeatherApp.ViewModel
             }
         }
 
+        public WeatherVM()
+        {
+
+            if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
+            {
+                SelectedCity = new City { LocalizedName = "New York" };
+                CurrentConditions = new CurrentConditions
+                {
+                    WeatherText = "cloudy",
+                    Temperature = new Temperature
+                    {
+                        Metric = new Units
+                        {
+                            Value = 20
+                        }
+                    }
+                };
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
