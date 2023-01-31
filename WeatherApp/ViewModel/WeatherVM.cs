@@ -43,13 +43,13 @@ namespace WeatherApp.ViewModel
         {
             get { return selectedCity; }
             set 
-            { 
-                selectedCity = value;
-                if(selectedCity != null)
-                {
-                    OnPropertyChanged("SelectedCity");
-                    GetCurrentConditions();
-                }
+            {
+                    selectedCity = value;
+                    if (selectedCity != null)
+                    {
+                        OnPropertyChanged("SelectedCity");
+                        GetCurrentConditions();
+                    }
             }
         }
 
