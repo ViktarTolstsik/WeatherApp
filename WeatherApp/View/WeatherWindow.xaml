@@ -30,7 +30,15 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <TextBlock Text="{Binding LocalizedName}"/>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0}, {1} ({2})">
+                                        <Binding Path="LocalizedName"/>
+                                        <Binding Path="AdministrativeArea.LocalizedName"/>
+                                        <Binding Path="Country.LocalizedName"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

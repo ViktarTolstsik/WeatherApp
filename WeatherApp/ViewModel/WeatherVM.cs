@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WeatherApp.Model;
 using WeatherApp.ViewModel.Commands;
 using WeatherApp.ViewModel.Helpers;
@@ -47,8 +48,11 @@ namespace WeatherApp.ViewModel
                     selectedCity = value;
                     if (selectedCity != null)
                     {
-                        OnPropertyChanged("SelectedCity");
-                        GetCurrentConditions();
+                        if (!DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
+                        {
+                            OnPropertyChanged("SelectedCity");
+                            GetCurrentConditions();
+                        }
                     }
             }
         }
@@ -62,7 +66,7 @@ namespace WeatherApp.ViewModel
 
             if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
             {
-                SelectedCity = new City { LocalizedName = "New York" };
+                SelectedCity = new City { LocalizedName = "Minsk" };
                 CurrentConditions = new CurrentConditions
                 {
                     WeatherText = "cloudy",
@@ -72,7 +76,8 @@ namespace WeatherApp.ViewModel
                         {
                             Value = "20"
                         }
-                    }
+                    },
+                    HasPrecipitation = true
                 };
             }
 
@@ -85,6 +90,7 @@ namespace WeatherApp.ViewModel
             Query = string.Empty;
             CurrentConditions = await AccuWeatherHelper.GetCurrentConditions(SelectedCity.Key);
             Cities.Clear();
+
         }
 
         public async void MakeQuery()
