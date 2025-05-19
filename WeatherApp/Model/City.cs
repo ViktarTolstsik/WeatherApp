@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeatherApp.Model
 {
-
+    //какая-то хуйня
     public class Area
     {
         public string ID { get; set; }
